@@ -1,0 +1,9 @@
+FROM octopusdeploy/worker-tools:1.0-ubuntu.18.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN  echo "deb [arch=amd64] https://packages.microsoft.com/debian/8/prod jessie main" | tee /etc/apt/sources.list.d/mssql-cli.list  && \
+  apt-get -y update  && \
+  apt-get -y install mssql-cli  && \
+  # Install missing dependencies
+  apt-get -y install -f
