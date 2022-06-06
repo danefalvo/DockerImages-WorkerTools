@@ -1,9 +1,12 @@
-FROM octopusdeploy/worker-tools:1.0-ubuntu.18.04
+FROM octopusdeploy/worker-tools:3.3.2-ubuntu.18.04
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG Powershell_Version=7.0.2\*    # UPDATED Powershell Version
 
 RUN  echo "deb [arch=amd64] https://packages.microsoft.com/debian/8/prod jessie main" | tee /etc/apt/sources.list.d/mssql-cli.list  && \
   apt-get -y update  && \
   apt-get -y install mssql-cli  && \
+  # Install specific version of Powershell
+  apt-get install -y powershell=${Powershell_Version} && \
   # Install missing dependencies
   apt-get -y install -f
